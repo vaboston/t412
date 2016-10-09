@@ -6,6 +6,11 @@ Une [web-app simple mais efficace](https://mondedie.fr/viewtopic.php?id=8663) co
 
 Clônez le dépot dans votre répertoire `www/`.  
 `git clone https://github.com/matthiasbosc/t412`
+Téléchargez les composants nécessaires:  
+```bash
+cd t412
+bin/composer update
+```
 
 Configurez votre vhost (voir [ci-dessous](#vhost-nginx)).  
 Rendez-vous à l'adresse où pointe votre domaine (`domain.tld/setup.php`), vérifier que les extensions nécessaires soient chargées et le cas échéant récupérez votre clé de sécurité.  
