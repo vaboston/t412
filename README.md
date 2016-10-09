@@ -5,7 +5,9 @@ Une [web-app simple mais efficace](https://mondedie.fr/viewtopic.php?id=8663) co
 ## Installation
 
 Clônez le dépot dans votre répertoire `www/`.  
-`git clone https://github.com/matthiasbosc/t412`  
+`git clone https://github.com/matthiasbosc/t412`
+
+
 Téléchargez les composants nécessaires:  
 ```bash
 cd t412
