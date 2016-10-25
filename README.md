@@ -24,24 +24,24 @@ const DB_HOST = 'localhost';
 const DB_NAME = '';
 const DB_USER = '';
 const DB_PASS = '';
-/** clé de sécurité */
+/** clé API t411 dispo dans "Mon compte" */
 const KEY = "";
 /** préfixe pour DL Syno -- WIP */
 const DL_PREFIX = 'https://dl.domain.tld/';
-/** nom de domaine, sans http(s) */
+/** Nom de domaine, sans http(s) */
 public $domainName = 'domain.tld';
-/** utilisateur t411 - nécessaire pour lancer les requêtes cron */
+/** Nom d'utilisateur t411 - nécessaire pour lancer les requêtes cron */
 CONST T411USER = 'jeanneige';
 ```
 
 Retournez à l'adresse où pointe votre domaine (`domain.tld/setup.php`) et vérifier que tous les tests renvoient "Ok".  
 Il ne vous reste plus qu'à ajouter vos tâches cron pour récupérer les tops et (facultatif) le téléchargement automatique.
 ```bash
-0 * * * * /usr/bin/php /votre/repertoire/www/cli/top.php
-0 * * * * /usr/bin/php /votre/repertoire/www/cli/autodownload.php
+0 * * * * /usr/bin/php /var/www/t412/cli/top.php
+0 * * * * /usr/bin/php /var/www/t412/cli/autodownload.php
 ```
 
-# Vhost nginx
+# VHOST Nginx
 ```
 server {
     listen 80;
@@ -55,11 +55,15 @@ server {
     listen [::]:443 ssl http2;
     server_name domain.tld;
 
-
-    root /var/www/chemin/voulu;
+    root /var/www/t412;
     index index.html index.php;
 
-    include ssl/.conf;
+    access_log /var/log/nginx/t412-access.log combined;
+    error_log /var/log/nginx/t412-error.log error;
+    
+    ssl_certificate /etc/letsencrypt/live/t412.domain.tld/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/t412.domain.tld/privkey.pem;
+    
     location / {
         # First attempt to serve request as file, then
         # as directory, then fall back to displaying a 404.
@@ -79,14 +83,15 @@ server {
         rewrite ^/top/week$|top/week/$ /top/week.php last;
         rewrite ^/top/month$|top/month/$ /top/month.php last;
     }
-
+    
+    # NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
     location ~ \.php$ {
-        include snippets/fastcgi-php.conf;
-        fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        # NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
-        fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include /etc/nginx/fastcgi_params;
     }
-
+    
     location ~* \.(jpg|jpeg|gif|png|css|js|ico|xml|html)$ {
         expires 90d;
         access_log off;
