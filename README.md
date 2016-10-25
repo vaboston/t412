@@ -2,6 +2,10 @@
 
 Une [web-app simple mais efficace](https://mondedie.fr/viewtopic.php?id=8663) construite autour de l'API T411, avec quelques features sympa (téléchargement sur Seedbox, Syno (WIP), auto-téléchargement des séries, etc.).
 
+## UPDATE
+Nouvelle version de T412 avec l'ajout d'un bouton de téléchargement du fichier torrent et de l'ajout à la Seedbox depuis la page "Recherche".
+Intégration des FontAwesome
+
 ## Installation
 
 Clônez le dépot dans votre répertoire `www/`.  
