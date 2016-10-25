@@ -41,6 +41,7 @@ $t411->querystring =  isset($_GET['cat']) && ctype_digit($_GET['cat']) ? $_GET['
             <option <?php if($catid == '631'){echo 'selected ';}?>value="631">Film</option>
             <option <?php if($catid == '433'){echo 'selected ';}?>value="433">Série</option>
             <option <?php if($catid == '633'){echo 'selected ';}?>value="633">Concert</option>
+            <option <?php if($catid == '404'){echo 'selected ';}?>value="404">eBook</option>
             <option <?php if($catid == '635'){echo 'selected ';}?>value="635">Spectacle</option>
             <option <?php if($catid == '639'){echo 'selected ';}?>value="639">Émission TV</option>
             <option <?php if($catid == '236'){echo 'selected ';}?>value="236">Windows</option>
