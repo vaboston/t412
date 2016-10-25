@@ -10,7 +10,7 @@ class T411 {
   const WEB_URL = 'https://t411.ch';
   /** MySQL */
   const DB_HOST = 'localhost';
-  const DB_NAME = '';
+  const DB_NAME = 't412';
   const DB_USER = '';
   const DB_PASS = '';
   /** clé de sécurité */
@@ -18,7 +18,7 @@ class T411 {
   /** préfixe pour DL Syno -- WIP */
   const DL_PREFIX = '';
   /** nom de domaine */
-  public $domainName = '';
+  public $domainName = 'domain.tld';
   /** utilisateur t411 - pour lancer les requêtes cron */
   CONST T411USER = '';
 
